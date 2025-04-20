@@ -8,10 +8,14 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-console.log('MONGODB_URI:', process.env.MONGODB_URI); // Debug URI
-mongoose.connect(process.env.MONGODB_URI)
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI, {
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+  dbName: 'sports_booking'
+})
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => console.error('MongoDB connection error:', err.message, err));
 
 // Routes
 app.use('/api/health', require('./api/health'));

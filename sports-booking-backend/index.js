@@ -12,6 +12,8 @@ console.log('MONGODB_URI:', process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI, {
   serverSelectionTimeoutMS: 5000,
   socketTimeoutMS: 45000,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
   dbName: 'sports_booking'
 })
   .then(() => console.log('MongoDB connected'))
